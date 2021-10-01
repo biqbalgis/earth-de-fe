@@ -12,11 +12,11 @@ export const APIs = Object.freeze({
 class Api {
 
   static getURL (api, params = null) {
-    const REACT_APP_API_URL = "http://192.168.8.129:8000"; //https://digitalarznode.com"; //"http://127.0.0.1:8000"; //
+    const REACT_APP_API_URL = "http://167.99.131.2:8000";
     let url = `${REACT_APP_API_URL}/${api}`;
-    for (const key in params) 
+    for (const key in params)
       url = url.replace(":" + key, params[key]);
-    
+
 
     return url;
   }
@@ -151,18 +151,18 @@ class Api {
   }
 
   static async apiResponsePayload (response, isJSON = true) {
-    if (response.ok) 
+    if (response.ok)
       return isJSON ? await response.json() : await response.text();
-    else if (response.status === 401) 
+    else if (response.status === 401)
       CommonUtils.showSnackbar("You are unauthorized to submit this request. Please contact project office.", AlertType.error);
     // store.dispatch(setAuthentication(false));
-    else if (response.status === 400) 
+    else if (response.status === 400)
       CommonUtils.showSnackbar("Bad Request. Please check your parameters...");
-    else if (response.status === 204) 
+    else if (response.status === 204)
       CommonUtils.showSnackbar("No related data or content found", AlertType.error);
-    else 
+    else
       CommonUtils.showSnackbar("Failed to post service. Please contact admin", AlertType.error);
-    
+
     return null;
   }
 

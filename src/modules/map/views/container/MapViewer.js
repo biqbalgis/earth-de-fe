@@ -106,36 +106,35 @@ class MapViewer extends React.Component{
     const classes = CommonUtils.convertStyle2Classes(this.getStyle());
     const {open} = this.state;
     return(
-      <Container ref={this.containerRef}>
-        <AppBar position="relative">
-          <Toolbar>
-            <Typography variant="h6" noWrap className={classes.title}>
-              {this.state.layerInfo?.title} Map
-            </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={()=>this.handleDrawerOpen(null)}
-              edge="start"
-            >as
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+        <Container ref={this.containerRef}>
+          <AppBar position="relative">
+            <Toolbar>
+              <Typography variant="h6" noWrap className={classes.title}>
+                {this.state.layerInfo?.title} Map
+              </Typography>
+              <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={()=>this.handleDrawerOpen(null)}
+                  edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
 
 
-        <Grid container direction="row" >
-          <Grid item className={classes.mapItemFull}>
-            <div id={"map-div"} style={mapStyle}>
-              <MapTopToolbar MapVM={this.layerDesignerMap} />
-            </div>
+          <Grid container direction="row" >
+            <Grid item className={ open ? classes.mapItemShift : classes.mapItemFull}>
+              <div id={"map-div"} style={mapStyle}>
+              </div>
+            </Grid>
+            <Grid item className={open ?  classes.drawer : classes.drawerClose}>
+              <LayerDesignerButtons open={open} />
+            </Grid>
           </Grid>
-          <Grid item className={open ?  classes.drawer : classes.drawerClose}>
-            <LayerDesignerButtons open={open} />
-          </Grid>
-        </Grid>
 
-      </Container>
+        </Container>
 
     );
   }
